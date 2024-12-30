@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="purchase_order_form_supplied_product">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase_product_matrix.purchase_order_form_matrix" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='order_line']/tree/field[@name='product_template_id']"
+                position="attributes"
+            >
+                <attribute name="context" operation="update">
+                        {'restrict_supplier_id': parent.partner_id,
+                        'use_only_supplied_product': parent.use_only_supplied_product}
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
